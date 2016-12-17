@@ -1,0 +1,15 @@
+test_interview_homepage:
+    path:     /interview
+    defaults: { _controller: TestInterviewBundle:Default:index }
+
+contributions:
+  path: /contributions
+  defaults: {_controller: TestInterviewBundle:Contributions:contributions}
+
+contribution:
+  path: /contributions/{contributionName}
+  defaults: {_controller: TestInterviewBundle:Contributions:biosByContribution}
+
+testdb:
+  path: /testdb
+  defaults: {_controller: TestInterviewBundle:Default:testdb}

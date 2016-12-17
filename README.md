@@ -44,33 +44,44 @@ Access the project with your favourite browser. You should see similar welcome s
 ## Test tasks:
 
 1. Change the text on symfony homepage from "Welcome to Symfony 2.8.8" to "This is a test"
+OK
 
 1. Run the PhpUnit test. Check if there are any errors, if so fix them.
+OK (en mettant en commentaires "swiftmailer" dans config_test.yml et modifier le test)
 
 1. Create a new Bundle "InterviewBundle" within the namespace "Test"
+OK (changement de l'index de l'appli avec la commande generate:bundle)
 
 1. Create a method helloAction under AppBundle\Controller\DefaultController
   * for route `/hello`
   * with a proper json return `{"hello":"world!"}`
+Ok (mais ce ne devrait pas être dans le nouveau bundle?)
 
 1. Create a "Bios" collection and load the example data into your MongoDB server
   * copy the json string from mongodb website ([link](https://docs.mongodb.com/manual/reference/bios-example-collection/))
   * or download and load the archive dump ([link](https://raw.githubusercontent.com/OskHa/php_interview_test/master/symfony_mongodb_example.archive))
+OK (MongoDB)
 
 1. Define ODM "Bios" document under namespace Test/InterviewBundle/Documents
+Ok sauf qu'on ne doit pas utiliser "Documents" mais "Document" pour que le mapping fonctionne (pas trouvé d'autres solutions)
 
 1. Define ODM "Bios" repository under namespace Test/InterviewBundle/Repositories
+Ok sauf qu'on doit utiliser "Repository" et non "Repositories"
 
+A partir de ce point, j'ai créé une methode (avec la route \testdb) pour tester les methodes demandées
 1. Implement following repository methods
   * findByFirstName($firstName)
   * findByContribution($contributionName)
   * findByDeadBefore($year)
+OK
 
 1. Define and create a service "BiosService" under namespace Test/InterviewBundle/Services and implement following methods
   * getAllAwards()
   * Use the logger to log operations (error, warning, debug)
+Ok, je fais un retour JsonResponse pour mes tests (pas précisé dans l'"énoncé")
 
 1. Create ContributionsController under namespace Test/InterviewBundle/Controller
+OK
 
 1. Add a contributionsAction method to your ContributionsController
   * for route `/contributions`
@@ -78,6 +89,7 @@ Access the project with your favourite browser. You should see similar welcome s
   * avoid logic under controller
   * method should list all contributions
   * with a proper json return `["contrib", ...]`
+OK
 
 1. Add a biosByContributionAction method to your ContributionsController
   * for route `/contributions/{contributionName}`
@@ -85,6 +97,8 @@ Access the project with your favourite browser. You should see similar welcome s
   * avoid logic under controller
   * method should list all bios documents with provided contribution
   * with a proper json return `[{...}]`
+Ok j'ai rajouté la logique dans le Service (d'ailleurs c'est une copie de 'findByContribution' qui ne devrait pas être redondant,
+ mais je ne l'enlève du BiosRepository car c'est une demande, en fait le service pourrait complètement remplacer BiosRepository)
 
 1. make a unit test for the controller
   * check if route `/hello` has response code 200
@@ -92,15 +106,17 @@ Access the project with your favourite browser. You should see similar welcome s
   * check if route `/contributions` has response code 200
   * check if route `/contributions/fake` has response code 404
   * check if route `/contributions/OOP` has response code 200
+Ok j'ai mis les tests dans Test/InterviewBundle/Tests/Controller/DefaultControllerTest.php
   
 1. make a unit test for the BiosService
   * at least 1 method of your choice
+Ok j'ai mis un test de 'getAllContributions' avec retour Json à la suite des tests précédents
 
 1. write a command called `test:command` that should accept 1 argument called id under namespace Test/InterviewBundle/Command
   * The command should check if a Bios document with an id of the argument exists
   * if document exists, return info "document exists"
   * if document doesnt exist, return error "document doesnt exist"
-
+Ok (par contre Mongo a un petit soucis pour find un objet avec un id, pas moyen de le faire proprement en 'requête' alors j'ai du le faire en php)
 
 ## Bonus tasks
 

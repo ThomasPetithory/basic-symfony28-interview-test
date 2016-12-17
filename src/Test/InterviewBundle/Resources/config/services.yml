@@ -1,0 +1,10 @@
+services:
+    testinterview.biosservice:
+        class: Test\InterviewBundle\Service\BiosService
+        arguments:
+                entityManager: "@doctrine.odm.mongodb.document_manager"
+
+
+#    test_interview.example:
+#        class: Test\InterviewBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
