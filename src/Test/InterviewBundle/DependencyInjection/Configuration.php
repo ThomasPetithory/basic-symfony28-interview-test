@@ -23,8 +23,8 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('ping')
-            //      ->defaultValue('pong')
-                    ->defaultValue()
+                  ->defaultValue('pong')
+             //       ->defaultValue()
                 ->end()
             ->end();
 
