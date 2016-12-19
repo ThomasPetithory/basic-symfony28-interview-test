@@ -45,3 +45,8 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+
+# Bonus Task 1
+#test:
+test_interview:
+  ping: pong

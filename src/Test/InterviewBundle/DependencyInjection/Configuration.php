@@ -19,6 +19,14 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('test_interview');
+        // Bonus Task 1
+        $rootNode
+            ->children()
+                ->scalarNode('ping')
+            //      ->defaultValue('pong')
+                    ->defaultValue()
+                ->end()
+            ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

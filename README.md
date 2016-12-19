@@ -125,14 +125,17 @@ Ok (par contre Mongo a un petit soucis pour find un objet avec un id, pas moyen 
 test:
   ping: pong
 ```
+Ok
 
 1. Check the symfony application for errors and fix them if any.
+Ok, j'ai du modifier "test:" en "test_interview:" qui est le namespace du bundle
+et ajouter du code dans le DependencyInjection/Configuration pour ajouter le paramètre ping de valeur pong (sans valeur par défaut)
 
 1. write a prompt for the command `test:command`
   * Prompt text is "This is a test. Do you want to continue (y/N) ?"
   * If you decline, return error "Nothing done. Exiting..."
   * If you accept, run the command
-
+OK
 
 # That's it!
 ## Thank you for your participation! Good luck submitting your results!
