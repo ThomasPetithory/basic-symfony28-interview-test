@@ -1,5 +1,5 @@
 <?php
-
+// Demande 7, créé par generate
 namespace Test\InterviewBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
@@ -12,18 +12,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class BiosRepository extends DocumentRepository
 {
-    // Test perso
-    public function findAllOrderedById()
-    {
-        return $this->createQueryBuilder()
-            ->sort('id', 'DESC')
-            ->getQuery()
-            ->execute()
-            ->toArray();
-    }
-
-    // on assume le fait que plusieurs personnes peuvent avoir le même prénom
-    // donc on retourne toujours un tableau d'objet BiosDocument
+    // Demande 8.1
     public function findByFirstName($firstName)
     {
         $result = $this->createQueryBuilder()
@@ -32,14 +21,18 @@ class BiosRepository extends DocumentRepository
             ->getQuery()
             ->execute()
             ->toArray();
+        // toujours tester qu'il existe un résultat sinon on retourne false pour éviter un 404
         if (empty($result))
             return false;
+        // on assume le fait que plusieurs personnes peuvent avoir le même prénom
+        // donc on retourne toujours un tableau d'objet BiosDocument
         foreach($result as $bios){
             $data[] = $bios;
         }
         return $data;
     }
 
+    // Demande 8.2
     public function findByContribution($contributionName)
     {
         $result = $this->createQueryBuilder()
@@ -56,8 +49,10 @@ class BiosRepository extends DocumentRepository
         return $data;
     }
 
+    // Demande 8.3
     public function findByDeadBefore($year)
     {
+        // On assume le fait que le décès doit être avant le 01/01/$year 00:00:00
         $date_search =  new \MongoDate(strtotime("$year-01-01 00:00:00"));
         $result = $this->createQueryBuilder()
             ->find()
@@ -65,7 +60,6 @@ class BiosRepository extends DocumentRepository
             ->getQuery()
             ->execute()
             ->toArray();
-
         return $result;
     }
 

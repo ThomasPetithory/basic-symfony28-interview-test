@@ -1,4 +1,5 @@
 <?php
+// Demande 6, setters/getters générés, obligation d'utiliser 'Document' au lieu de 'Documents'
 namespace Test\InterviewBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
@@ -8,6 +9,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  */
 class Bios
 {
+    // J'utilise les annotations (plus imple avec MongoDb) pour générer les setters/getters
+    // et donc vérifier que le mapping est OK au passage
     /**
      * @MongoDB\Id
      */

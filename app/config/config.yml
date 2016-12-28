@@ -47,6 +47,6 @@ doctrine_mongodb:
             auto_mapping: true
 
 # Bonus Task 1
-#test:
+#test: <-- non fonctionnel
 test_interview:
   ping: pong

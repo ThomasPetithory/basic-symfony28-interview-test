@@ -20,8 +20,12 @@ class DefaultController extends Controller
         ));
     }
 
-    public function helloAction() {
-
+    // Demande 4
+    /**
+     * @Route("/hello", name="hello")
+     */
+    public function helloAction()
+    {
         return new JsonResponse(array('hello' => 'world'));
     }
 }

@@ -4,6 +4,7 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
+                <!-- Demande 1 -->
                 <h1>This is a test</h1>
                 <!--<h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>-->
             </div>
@@ -43,7 +44,7 @@
                     <br/>
                     <!-- petit rajout pour avoir les liens directement sur l'acceuil -->
                     <ul>
-                        <li><a href= {{ path('test_interview_homepage') }}>Index du bundle Test</a></li>
+                        <li><a href={{ path('test_interview_homepage') }}>Index du bundle Test</a></li>
                         <li><a href={{ path('hello') }}>Action Hello du controleur default du bundle App</a></li>
                         <li><a href={{ path('testdb') }}>Page perso de Test pour les différents méthodes et service demandés</a></li>
                         <li><a href={{ path('contributions') }}>Page des contributions</a></li>

@@ -1,4 +1,5 @@
 <?php
+// Demande 15 et Bonus 2
 namespace Test\InterviewBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -21,6 +22,7 @@ class TestCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Demande Bonus 2
         $helper = $this->getHelper('question');
         $question = new ConfirmationQuestion('This is a test. Do you want to continue (y/N)?', false);
 
@@ -28,6 +30,7 @@ class TestCommand extends ContainerAwareCommand
             $output->writeln("Nothing done. Exiting...");
             return;
         }
+        // Fin Demande Bonus 2
         $id= $input->getArgument('id');
 
         $container = $this->getContainer();

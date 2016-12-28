@@ -42,43 +42,54 @@ Access the project with your favourite browser. You should see similar welcome s
 
 
 ## Test tasks:
+/!\ Précision: je suis sous Windows ("/" "\")
 
 1. Change the text on symfony homepage from "Welcome to Symfony 2.8.8" to "This is a test"
 OK
 
 1. Run the PhpUnit test. Check if there are any errors, if so fix them.
 OK (en mettant en commentaires "swiftmailer" dans config_test.yml et modifier le test)
+(commande à la racine : "phpunit -c app/ src/AppBundle/Tests/Controller/DefaultControllerTest.php")
 
 1. Create a new Bundle "InterviewBundle" within the namespace "Test"
 OK (changement de l'index de l'appli avec la commande generate:bundle)
+(commande à la racine: "php app/console generate:bundle --namespace=Test/InterviewBundle --bundle-name=TestInterviewBundle")
 
 1. Create a method helloAction under AppBundle\Controller\DefaultController
   * for route `/hello`
   * with a proper json return `{"hello":"world!"}`
-Ok (mais ce ne devrait pas être dans le nouveau bundle?)
+Ok (return JsonResponse)
 
 1. Create a "Bios" collection and load the example data into your MongoDB server
   * copy the json string from mongodb website ([link](https://docs.mongodb.com/manual/reference/bios-example-collection/))
   * or download and load the archive dump ([link](https://raw.githubusercontent.com/OskHa/php_interview_test/master/symfony_mongodb_example.archive))
-OK (MongoDB)
+OK mais il faut que vous fassiez la manip:
+* mettre la collection en copier/coller dans une database "test" ou changer dans app/config/parameters.yml
+* utiliser le dump symfony_mongodb_example.archive à la racine
 
 1. Define ODM "Bios" document under namespace Test/InterviewBundle/Documents
 Ok sauf qu'on ne doit pas utiliser "Documents" mais "Document" pour que le mapping fonctionne (pas trouvé d'autres solutions)
+(commande à la racine pour les setters/getters: "php app/console doctrine:mongodb:generate:documents TestInterviewBundle")
 
 1. Define ODM "Bios" repository under namespace Test/InterviewBundle/Repositories
 Ok sauf qu'on doit utiliser "Repository" et non "Repositories"
+(commande à la racine; "php app/console doctrine:mongodb:generate:repositories TestInterviewBundle")
 
-A partir de ce point, j'ai créé une methode (avec la route \testdb) pour tester les methodes demandées
+/!\A partir de ce point, j'ai créé une methode (avec la route \testdb) pour tester les methodes demandées
+De plus, les nouvelles routes sont définies dans le routing du Bundle pour la portabilité
 1. Implement following repository methods
   * findByFirstName($firstName)
   * findByContribution($contributionName)
   * findByDeadBefore($year)
-OK
+OK (on peut voir les résultats sur /testdb, on peut changer les paramètres des recherches dans le controller
+src/Test/InterviewBundle/Controller/DefaultController.php)
+/!\ les ids de la db sont parfois 'bizarre' (expl: 51df07b094c6acd67e492f41 (oui oui c'est bien un id))
 
 1. Define and create a service "BiosService" under namespace Test/InterviewBundle/Services and implement following methods
   * getAllAwards()
   * Use the logger to log operations (error, warning, debug)
-Ok, je fais un retour JsonResponse pour mes tests (pas précisé dans l'"énoncé")
+Ok, inscrit dans les services du Bundle (pour la portabilité)
+Cependant, j'ai utilisé ma classe test pour tester le service, mais je ne me suis pas servi du logger
 
 1. Create ContributionsController under namespace Test/InterviewBundle/Controller
 OK
@@ -97,8 +108,7 @@ OK
   * avoid logic under controller
   * method should list all bios documents with provided contribution
   * with a proper json return `[{...}]`
-Ok j'ai rajouté la logique dans le Service (d'ailleurs c'est une copie de 'findByContribution' qui ne devrait pas être redondant,
- mais je ne l'enlève du BiosRepository car c'est une demande, en fait le service pourrait complètement remplacer BiosRepository)
+Ok
 
 1. make a unit test for the controller
   * check if route `/hello` has response code 200
@@ -107,7 +117,8 @@ Ok j'ai rajouté la logique dans le Service (d'ailleurs c'est une copie de 'find
   * check if route `/contributions/fake` has response code 404
   * check if route `/contributions/OOP` has response code 200
 Ok j'ai mis les tests dans Test/InterviewBundle/Tests/Controller/DefaultControllerTest.php
-  
+(commande à la racine: "phpunit -c app/ src/Test/InterviewBundle//Tests/Controller/DefaultControllerTest.php") 
+ 
 1. make a unit test for the BiosService
   * at least 1 method of your choice
 Ok j'ai mis un test de 'getAllContributions' avec retour Json à la suite des tests précédents
@@ -129,13 +140,13 @@ Ok
 
 1. Check the symfony application for errors and fix them if any.
 Ok, j'ai du modifier "test:" en "test_interview:" qui est le namespace du bundle
-et ajouter du code dans le DependencyInjection/Configuration pour ajouter le paramètre ping de valeur pong (sans valeur par défaut)
+et ajouter du code dans le DependencyInjection/Configuration pour ajouter le paramètre ping de valeur pong (valeur par défaut obligatoire)
 
 1. write a prompt for the command `test:command`
   * Prompt text is "This is a test. Do you want to continue (y/N) ?"
   * If you decline, return error "Nothing done. Exiting..."
   * If you accept, run the command
-OK
+OK, j'ai du modifier le code demandé en 15 forcément
 
 # That's it!
 ## Thank you for your participation! Good luck submitting your results!

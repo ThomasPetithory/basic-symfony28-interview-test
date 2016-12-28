@@ -1,4 +1,5 @@
 <?php
+// Demande 3, créé par generate
 
 namespace Test\InterviewBundle;
 
