@@ -23,6 +23,11 @@ class TestCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Demande Bonus 2
+        $id= $input->getArgument('id');
+        if (!isset($id)) {
+            $output->writeln("Missing Parameter (signature 'test:command {id}'). Exiting...");
+            return;
+        }
         $helper = $this->getHelper('question');
         $question = new ConfirmationQuestion('This is a test. Do you want to continue (y/N)?', false);
 
@@ -31,7 +36,6 @@ class TestCommand extends ContainerAwareCommand
             return;
         }
         // Fin Demande Bonus 2
-        $id= $input->getArgument('id');
 
         $container = $this->getContainer();
 
