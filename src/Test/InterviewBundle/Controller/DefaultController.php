@@ -8,6 +8,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 class DefaultController extends Controller
 {
+    public function indexAction()
+    {
+        return new Response("<html><body>Index du Bundle Test/Interview</body></html>");
+    }
+
     // fonction de test permettant de vérifier les query et les résultats
     public function testdbAction() {
         // Initialisation (captain obvious)

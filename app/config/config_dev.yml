@@ -32,5 +32,6 @@ monolog:
 
 # Demande 2, on ne sert pas (pour le moment) de mailer donc on peut désactiver la configuration
 # pour que le test PhpUnit passe
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    delivery_address: thomas.petithory@gmail.com
+    disable_delivery:  true
