@@ -24,13 +24,5 @@ class DefaultControllerTest extends WebTestCase
 
         $client->request('GET', '/contributions/OOP');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        // demande 14
-        $kernel = static::createKernel();
-        $kernel->boot();
-        $container = $kernel->getContainer();
-        $service = $container->get('testinterview.biosservice');
-        $service->getAllContributions();
-        $this->assertSame('application/json',  $client->getResponse()->headers->get('Content-Type'));
     }
 }
