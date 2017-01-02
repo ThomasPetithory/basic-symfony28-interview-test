@@ -4,14 +4,18 @@ namespace Test\InterviewBundle\Service;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class BiosService
 {
     // Ici on injecte l'entitymanager en arguments depuis la config dans services.yml du bundle
     private $em;
+    private $logger;
 
-    public function __construct($em) {
+    public function __construct($em,LoggerInterface $logger) {
         $this->em = $em;
+        $this->logger = $logger;
+
     }
 
     // Demande 9
@@ -21,13 +25,17 @@ class BiosService
             ->getRepository('TestInterviewBundle:Bios')
             ->findAll();
         if (empty($entities)) {
+            $this->logger->info('BiosService: Aucun éléments trouvé');
             $result = false;
         } else {
             $result = array();
             if ($entities) {
                 foreach ($entities as $bios) {
                     if (!is_null($bios->getAwards())) {
+                        $this->logger->info("BiosService: Awards pour le bios d'id : ".strval($bios->getId()));
                         $result[] = $bios->getAwards();
+                    } else {
+                        $this->logger->info("BiosService: Awards inexistants pour le bios d'id : ".strval($bios->getId()));
                     }
                 }
             }

@@ -4,3 +4,4 @@ services:
         class: Test\InterviewBundle\Service\BiosService
         arguments:
                 entityManager: "@doctrine.odm.mongodb.document_manager"
+                logger: "@logger"
